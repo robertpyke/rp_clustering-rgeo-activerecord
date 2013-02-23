@@ -5,7 +5,7 @@ require 'rp_clustering-rgeo-activerecord/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "rp_clustering-rgeo-activerecord"
-  gem.version       = RpClustering::Rgeo::Activerecord::VERSION
+  gem.version       = RPClustering::RGeo::ActiveRecord::VERSION
   gem.authors       = ["Robert Pyke"]
   gem.email         = ["robert.j.pyke@gmail.com"]
   gem.description   = %q{TODO: Write a gem description}

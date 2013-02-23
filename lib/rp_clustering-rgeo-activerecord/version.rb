@@ -1,6 +1,6 @@
-module RpClustering
-  module Rgeo
-    module Activerecord
+module RPClustering
+  module RGeo
+    module ActiveRecord
       VERSION = "0.0.1"
     end
   end
