@@ -25,4 +25,6 @@ Gem::Specification.new do |gem|
 
   # Deployed Gem Dependencies
   gem.add_dependency('activerecord', '~> 3.0')
+  gem.add_dependency('rgeo', '~> 0.3.20')
+  gem.add_dependency('rgeo-activerecord', '~> 0.4.6')
 end
