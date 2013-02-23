@@ -1,4 +1,4 @@
-# RpClustering::Rgeo::Activerecord
+# RPClustering::RGeo::ActiveRecord
 
 TODO: Write a gem description
 
