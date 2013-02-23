@@ -1,8 +1,8 @@
 require "rp_clustering-rgeo-activerecord/version"
 
-module RpClustering
-  module Rgeo
-    module Activerecord
+module RPClustering
+  module RGeo
+    module ActiveRecord
       # Your code goes here...
     end
   end
