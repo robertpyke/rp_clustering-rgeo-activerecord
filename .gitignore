@@ -13,5 +13,7 @@ pkg
 rdoc
 spec/reports
 test/tmp
+test/database_local.yml
 test/version_tmp
 tmp
+
