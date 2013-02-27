@@ -27,4 +27,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency('activerecord', '~> 3.0')
   gem.add_dependency('rgeo', '~> 0.3.20')
   gem.add_dependency('rgeo-activerecord', '~> 0.4.6')
+  gem.add_dependency('arel', '~> 3.0.2')
 end
