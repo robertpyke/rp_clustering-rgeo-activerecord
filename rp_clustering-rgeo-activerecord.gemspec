@@ -25,12 +25,14 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('rake')
   gem.add_development_dependency('rdoc')
   gem.add_development_dependency('pg')
+  gem.add_development_dependency('squeel', '~> 1.0.16')
 
   # Deployed Gem Dependencies
   gem.add_dependency('activerecord', '~> 3.0')
   gem.add_dependency('arel', '~> 3.0.2')
   gem.add_dependency('rgeo', '~> 0.3.20')
   gem.add_dependency('rgeo-activerecord', '~> 0.4.6')
+
   # This Gem is specific to postgis
   gem.add_dependency('activerecord-postgis-adapter', '~> 0.5.1')
 end

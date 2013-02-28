@@ -57,6 +57,29 @@ module RPClustering
 
         end
 
+        # ST_MinimumBoundingCircle: http://www.postgis.org/docs/ST_MinimumBoundingCircle.html
+        #
+        # Implements postgis function variant:
+        #
+        #   geometry ST_MinimumBoundingCircle(geometry geomA, integer num_segs_per_qt_circ=48);
+        #
+        # Returns a geometry
+
+        def st_minimumboundingcircle(num_segs=nil)
+          args = [self]
+          if num_segs
+            args << num_segs.to_s
+
+            ::RGeo::ActiveRecord::SpatialNamedFunction.new(
+              'ST_MinimumBoundingCircle', args, [true, true, false]
+            )
+          else
+            ::RGeo::ActiveRecord::SpatialNamedFunction.new(
+              'ST_MinimumBoundingCircle', args, [true, true]
+            )
+          end
+        end
+
       end
 
     end
