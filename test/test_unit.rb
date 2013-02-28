@@ -8,7 +8,7 @@ module RPClustering
       module Tests
         class MyUnitTest < Test::Unit::TestCase  # :nodoc:
 
-          # Use the active record adapter test helper
+          # Use the RGEO active record adapter test helper
 
           DATABASE_CONFIG_PATH = ::File.dirname(__FILE__)+'/database.yml'
           OVERRIDE_DATABASE_CONFIG_PATH = ::File.dirname(__FILE__)+'/database_local.yml'
@@ -37,14 +37,26 @@ module RPClustering
               assert_not_nil(RPClustering::RGeo::ActiveRecord::VERSION)
             end
 
+            # Test that the st_snaptogrid method exists on the Arel::Attribute
+            # and on the Arel::Table
+
             def test_st_snaptogrid_method_should_exist
               arel_klass = populate_ar_class(:latlon_point)
               assert(
                 arel_klass.arel_table[:latlon_point].methods.include?(:st_snaptogrid),
-                "Active Record should now have a st_snaptogrid function. " +
+                "Active Record Arel::Attribute should now have a st_snaptogrid function. " +
                 "Found:\n#{arel_klass.arel_table[:latlon_point].methods.sort}"
               )
+
+              assert(
+                arel_klass.arel_table.methods.include?(:st_snaptogrid),
+                "Active Record Arel::Table should now have a st_snaptogrid function. " +
+                "Found:\n#{arel_klass.arel_table.methods.sort}"
+              )
             end
+
+            # Confirm that the st_snaptogrid function is producing the 
+            # expected results
 
             def test_st_snap_to_grid
               arel_klass = populate_ar_class(:latlon_point)
@@ -68,34 +80,26 @@ module RPClustering
               )
 
               attr = arel_klass.arel_table[:latlon]
-              select_clause = Arel::Nodes::NamedFunction.new('ST_SnapToGrid', [attr.st_collect(), 12])
-              # select_clause = arel_klass.select(attr.st_collect().each.st_snaptogrid(10))
               t = arel_klass.arel_table
-              q = t.select(t.st_snaptogrid(attr.st_collect()))
-              raise q.to_sql.inspect
-              # raise arel_klass.select(select_clause).to_sql.inspect
-#              arel_result = arel_klass.select_clause
-#              raise (arel_result.map { |e| e.attributes.to_s }).inspect
 
-              flunk("This test is work in progress")
+              q1 = arel_klass.select(t.st_astext(t.st_centroid(t.st_collect(attr))).as("cluster_centroid"))
+              q1 = q1.group(attr.st_snaptogrid(180))
 
-            end
+              assert_equal(1, q1.all.count(), "With a sufficiently large grid size, we would expect the st_snaptogrid to produce only a single point")
 
-            def test_query_point
-              arel_klass = populate_ar_class(:latlon_point)
-              obj = arel_klass.new
-              obj.latlon = @geographic_factory.point(1, 2)
-              obj.save!
-              id = obj.id
-              obj2 = arel_klass.where(:latlon => @geographic_factory.multi_point([@geographic_factory.point(1, 2)])).first
-              assert_equal(id, obj2.id)
-              obj3 = arel_klass.where(:latlon => @geographic_factory.point(2, 2)).first
-              assert_nil(obj3)
+              value = q1.first["cluster_centroid"]
+              compare_point = @geographic_factory.point(0,0)
+              assert_equal(@geographic_factory.parse_wkt(value), compare_point, "cluster centroid should be a valid point in the center of the earth")
+
+              q2 = arel_klass.select(t.st_astext(t.st_centroid(t.st_collect(attr))).as("cluster_centroid"))
+              q2 = q2.group(attr.st_snaptogrid(1))
+
+              assert_equal(points_generated, q2.all.count(), "With a small grid size, we would expect the st_snaptogrid to produce every single point")
+
             end
 
           end
         end
-
       end
     end
   end

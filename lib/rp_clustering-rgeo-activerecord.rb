@@ -1,4 +1,6 @@
 require "rp_clustering-rgeo-activerecord/version"
+require "rp_clustering-rgeo-activerecord/arel_attribute_spatial_expressions"
+require "rp_clustering-rgeo-activerecord/arel_table_spatial_expressions"
 
 module RPClustering
 
@@ -6,62 +8,28 @@ module RPClustering
 
     module ActiveRecord
 
-      module AttributeSpatialExpressions
+      # Spatial Expressions to be attached directly to Arel Attributes (DB columns)
 
-        # ST_SnapToGrid: http://postgis.refractions.net/documentation/manual-2.0/ST_SnapToGrid.html
-        #
-        # Implements postgis function variant:
-        #
-        #   geometry ST_SnapToGrid(geometry geomA, float size);
-        #
-        # Returns a geometry collection
-
-        def st_snaptogrid(grid_size)
-          args = [self, grid_size.to_s]
-
-          # SpatialNamedFunction takes the following args:
-          # * name
-          # * expr
-          # * spatial_flags
-          # * aliaz (defaults to nil)
-          #
-          #
-          # Understanding the spatial_flags argument
-          # -----------------------------------------
-          #
-          # A flag is true if the corresponding argument is spatial, else the
-          # flag is false.
-          # The first element is the spatial-ness result, the other args
-          # relate to our expression args
-
-          ::RGeo::ActiveRecord::SpatialNamedFunction.new(
-            'ST_SnapToGrid', args, [true, true, false]
-          )
-        end
-
-        # ST_Collect: http://postgis.refractions.net/documentation/manual-2.0/ST_Collect.html
-        #
-        # Implements postgis function variant:
-        #
-        #   geometry ST_Collect(geometry[] g1_array);
-        #
-        # Returns a geometry collection
-
-        def st_collect()
-          args = [self]
-
-          ::RGeo::ActiveRecord::SpatialNamedFunction.new(
-            'ST_Collect', args, [true, true]
-          )
-        end
-
+      module ArelAttributeSpatialExpressions
       end
 
       # Attach our Spatial Expression methods onto the Arel::Attribute class.
       #
       # i.e. As stated in the RGeo::ActiveRecord docs.. Allow chaining of spatial expressions from attributes
+
       ::Arel::Attribute.class_eval do
-        include ::RPClustering::RGeo::ActiveRecord::AttributeSpatialExpressions
+        include ::RPClustering::RGeo::ActiveRecord::ArelAttributeSpatialExpressions
+      end
+
+      # Spatial Expressions to be attached to Arel Table (DB tables)
+
+      module ArelTableSpatialExpressions
+      end
+
+      # Attach our Spatial Expression methods onto the Arel::Table class.
+
+      ::Arel::Table.class_eval do
+        include ::RPClustering::RGeo::ActiveRecord::ArelTableSpatialExpressions
       end
 
     end

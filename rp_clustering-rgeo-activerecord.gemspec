@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = RPClustering::RGeo::ActiveRecord::VERSION
   gem.authors       = ["Robert Pyke"]
   gem.email         = ["robert.j.pyke@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.summary       = %q{RGeo PostGIS extension to provide clustering functionality}
+  gem.description   = %q{A RGeo PostGIS extension to provide Active Record (Model) clustering functionality}
+  gem.homepage      = "https://github.com/robertpyke/rp_clustering-rgeo-activerecord"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -22,10 +22,13 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('test-unit', '~> 2.5.4')
   gem.add_development_dependency('rake')
   gem.add_development_dependency('rdoc')
+  gem.add_development_dependency('pg')
 
   # Deployed Gem Dependencies
   gem.add_dependency('activerecord', '~> 3.0')
+  gem.add_dependency('arel', '~> 3.0.2')
   gem.add_dependency('rgeo', '~> 0.3.20')
   gem.add_dependency('rgeo-activerecord', '~> 0.4.6')
-  gem.add_dependency('arel', '~> 3.0.2')
+  # This Gem is specific to postgis
+  gem.add_dependency('activerecord-postgis-adapter')
 end
