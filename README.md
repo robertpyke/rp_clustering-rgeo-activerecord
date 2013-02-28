@@ -42,37 +42,37 @@ e.g.
 
 ```ruby
 
-    # Get the Arel handle for the model
+# Get the Arel handle for the model
 
-    arel_table = MyModel.arel_table
+arel_table = MyModel.arel_table
 
-    # Our cluster grid size.
-    # Smaller grid_size means more clusters.
-    # Larger grid_size means less clusters (cluster covers a larger area).
-    # See http://www.postgis.org/docs/ST_SnapToGrid.html for more info.
+# Our cluster grid size.
+# Smaller grid_size means more clusters.
+# Larger grid_size means less clusters (cluster covers a larger area).
+# See http://www.postgis.org/docs/ST_SnapToGrid.html for more info.
 
-    grid_size = 0.1
+grid_size = 0.1
 
-    # Cluster against our model's :latlon attribute with a grid size of '0.1'.
-    # Return the centroid of each cluster as "cluster_centroid".
+# Cluster against our model's :latlon attribute with a grid size of '0.1'.
+# Return the centroid of each cluster as "cluster_centroid".
 
-    query = MyModel.select(
-      arel_table.st_astext(
-        arel_table.st_centroid(arel_table.st_collect(arel_table[:latlon]))
-      ).as("cluster_centroid")
-    ).group(arel_table[:latlon].st_snaptogrid(grid_size))
+query = MyModel.select(
+  arel_table.st_astext(
+    arel_table.st_centroid(arel_table.st_collect(arel_table[:latlon]))
+  ).as("cluster_centroid")
+).group(arel_table[:latlon].st_snaptogrid(grid_size))
 
-    # Iterate over our clusters
-    query.all.each do |cluster|
+# Iterate over our clusters
+query.all.each do |cluster|
 
-      # print the cluster_centroid (a point) as WKT
-      puts cluster["cluster_centroid"]
+  # print the cluster_centroid (a point) as WKT
+  puts cluster["cluster_centroid"]
 
-      # convert the WKT into a RGeo Geometry (a point)
-      geographic_factory.parse_wkt(cluster["cluster_centroid")
+  # convert the WKT into a RGeo Geometry (a point)
+  geographic_factory.parse_wkt(cluster["cluster_centroid")
 
-      # ...
-    end
+  # ...
+end
 
 ```
 
