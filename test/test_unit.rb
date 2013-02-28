@@ -87,6 +87,7 @@ module RPClustering
 
               assert_equal(1, q1.all.count(), "With a sufficiently large grid size, we would expect the st_snaptogrid to produce only a single point")
 
+
               value = q1.first["cluster_centroid"]
               compare_point = @geographic_factory.point(0,0)
               assert_equal(@geographic_factory.parse_wkt(value), compare_point, "cluster centroid should be a valid point in the center of the earth")
