@@ -1,4 +1,5 @@
 require "rp_clustering-rgeo-activerecord/version"
+require "rp_clustering-rgeo-activerecord/active_record_base_spatial_expressions"
 require "rp_clustering-rgeo-activerecord/arel_attribute_spatial_expressions"
 require "rp_clustering-rgeo-activerecord/arel_table_spatial_expressions"
 
@@ -7,6 +8,17 @@ module RPClustering
   module RGeo
 
     module ActiveRecord
+
+      # Spatial Expressions to be attached directly to ActiveRecord::Base
+
+      module BaseSpatialExpressions
+      end
+
+      # Attach our Spatial Expression methods onto the ActiveRecord::Base class.
+
+      ::ActiveRecord::Base.class_eval do
+        include ::RPClustering::RGeo::ActiveRecord::BaseSpatialExpressions
+      end
 
       # Spatial Expressions to be attached directly to Arel Attributes (DB columns)
 
