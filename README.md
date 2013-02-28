@@ -1,5 +1,7 @@
 # RPClustering::RGeo::ActiveRecord
 
+[![Code Climate](https://codeclimate.com/github/robertpyke/rp_clustering-rgeo-activerecord.png)](https://codeclimate.com/github/robertpyke/rp_clustering-rgeo-activerecord)
+
 A RGeo PostGIS extension to provide Active Record (Model) clustering functionality.
 
 The intention is that this Gem will eventually provide abstracted methods for
@@ -8,7 +10,7 @@ both "on the fly" clustering, as well as cached clustering (including associated
 This Gem is currently in early development, so expect changes. On this note, if you'd like a specific clustering
 algorithm or feature added, please ask.
 
-If you find a problem with this Gem, please don't hesitate to raise an [issue](https://github.com/robertpyke/rp_clustering-rgeo-activerecord/issues).
+If you find a problem with this Gem, please don't hesitate to [raise an issue](https://github.com/robertpyke/rp_clustering-rgeo-activerecord/issues).
 
 ## Installation
 
