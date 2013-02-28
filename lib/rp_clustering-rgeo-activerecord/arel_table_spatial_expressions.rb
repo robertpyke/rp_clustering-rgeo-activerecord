@@ -83,17 +83,16 @@ module RPClustering
 
         def st_minimumboundingcircle(g, num_segs=nil)
           args = [g]
+          spatial_flags = [true, true]
+
           if num_segs
             args << num_segs.to_s
-
-            ::RGeo::ActiveRecord::SpatialNamedFunction.new(
-              'ST_MinimumBoundingCircle', args, [true, true, false]
-            )
-          else
-            ::RGeo::ActiveRecord::SpatialNamedFunction.new(
-              'ST_MinimumBoundingCircle', args, [true, true]
-            )
+            spatial_flags << false
           end
+
+          ::RGeo::ActiveRecord::SpatialNamedFunction.new(
+            'ST_MinimumBoundingCircle', args, spatial_flags
+          )
         end
 
       end
