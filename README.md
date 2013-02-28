@@ -55,7 +55,7 @@ e.g.
       arel_table.st_astext(
         arel_table.st_centroid(arel_table.st_collect(attr))
       ).as("cluster_centroid")
-    ).group(arel_table[:latlon].st_snaptogrid(0.1))
+    ).group(arel_table[:latlon].st_snaptogrid(grid_size))
 
     # Iterate over our clusters
     query.all.each do |cluster|
