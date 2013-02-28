@@ -53,7 +53,7 @@ e.g.
 
     query = MyModel.select(
       arel_table.st_astext(
-        arel_table.st_centroid(arel_table.st_collect(attr))
+        arel_table.st_centroid(arel_table.st_collect(arel_table[:latlon]))
       ).as("cluster_centroid")
     ).group(arel_table[:latlon].st_snaptogrid(grid_size))
 
