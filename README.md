@@ -39,6 +39,7 @@ Or install it yourself as:
 This version allows for the "on the fly" use of a ST_SnapToGrid clustering function.
 The function is added to ActiveRecord::Base (Models). The function is:
 
+```ruby
 
 # Cluster using the PostGIS function ST_SnapToGrid
 # -------------------------------------------------
