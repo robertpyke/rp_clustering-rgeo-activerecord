@@ -59,7 +59,7 @@ The function is added to ActiveRecord::Base (Models). The function is:
 #
 #     If no +:grid_size+ is given, clusters will consist of all 'equal'
 #     geometries. E.g. all points at the same 
-#     postion (x,y) will be pulled together to form a single cluster.
+#     position (x,y) will be pulled together to form a single cluster.
 #     This is actually just a Group By of your +attr_to_cluster+.
 #
 # [:cluster_geometry_count] if set to true, the query will select, for
@@ -83,7 +83,7 @@ The function is added to ActiveRecord::Base (Models). The function is:
 #     cluster_minimum_bounding_circle as, defaults to "cluster_minimum_bounding_circle"
 #
 # Note: Using the options hash, you must 'select' at least one attribute,
-# else this method will Exception.
+# else this method will rase an ArgumentError.
 
 cluster_by_st_snap_to_grid(attr_to_cluster, options={})
 

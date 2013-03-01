@@ -32,7 +32,7 @@ module RPClustering
           #
           #     If no +:grid_size+ is given, clusters will consist of all 'equal'
           #     geometries. E.g. all points at the same 
-          #     postion (x,y) will be pulled together to form a single cluster.
+          #     position (x,y) will be pulled together to form a single cluster.
           #     This is actually just a Group By of your +attr_to_cluster+.
           #
           # [:cluster_geometry_count] if set to true, the query will select, for
