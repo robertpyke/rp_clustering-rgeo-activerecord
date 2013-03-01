@@ -26,14 +26,14 @@ module RPClustering
           # Options:
           #
           # [:grid_size] if set, will be used to create the cluster. The clustering
-          #     works rougly like this; all geometries within 'grid_size'
-          #     will be pulled together to form a single cluster. For a detailed
-          #     explanation, please see the PostGIS docs for ST_SnapToGrid.
+          #              works rougly like this; all geometries within 'grid_size'
+          #              will be pulled together to form a single cluster. For a detailed
+          #              explanation, please see the PostGIS docs for ST_SnapToGrid.
           #
-          #     If no +:grid_size+ is given, clusters will consist of all 'equal'
-          #     geometries. E.g. all points at the same 
-          #     position (x,y) will be pulled together to form a single cluster.
-          #     This is actually just a Group By of your +attr_to_cluster+.
+          #              If no +:grid_size+ is given, clusters will consist of all 'equal'
+          #              geometries. E.g. all points at the same 
+          #              position (x,y) will be pulled together to form a single cluster.
+          #              This is actually just a Group By of your +attr_to_cluster+.
           #
           # [:cluster_geometry_count] if set to true, the query will select, for
           #     each cluster, the number of geometries in the cluster.
