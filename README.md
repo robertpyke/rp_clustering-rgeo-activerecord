@@ -120,7 +120,7 @@ RGeo::GeoJSON.encode(feature_collection)
 # make outliers (small clusters) bright red, or you could vary the size of the
 # cluster centroid based on the size of cluster.
 #
-# Ideally, you could vary your +grid_size+ based on the user's view port.
+# Ideally, you would vary your +grid_size+ based on the user's view port.
 # For example, you could set it to fixed values based on the user's zoom level.
 # You could dynamically generate it based on some fraction of the user's view port bbox.
 
