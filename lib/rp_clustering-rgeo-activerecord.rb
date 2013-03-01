@@ -14,9 +14,8 @@ module RPClustering
       module BaseSpatialExpressions
       end
 
-      # Attach our Spatial Expression methods onto the ActiveRecord::Base class.
-
-      ::ActiveRecord::Base.class_eval do
+      # Attach our Spatial Expression methods onto the ActiveRecord::Base class (as class methods).
+      class ::ActiveRecord::Base
         include ::RPClustering::RGeo::ActiveRecord::BaseSpatialExpressions
       end
 
@@ -25,7 +24,7 @@ module RPClustering
       module ArelAttributeSpatialExpressions
       end
 
-      # Attach our Spatial Expression methods onto the Arel::Attribute class.
+      # Attach our Spatial Expression methods onto the Arel::Attribute class (as instance methods).
       #
       # i.e. As stated in the RGeo::ActiveRecord docs.. Allow chaining of spatial expressions from attributes
 
@@ -38,7 +37,7 @@ module RPClustering
       module ArelTableSpatialExpressions
       end
 
-      # Attach our Spatial Expression methods onto the Arel::Table class.
+      # Attach our Spatial Expression methods onto the Arel::Table class (as instance methods).
 
       ::Arel::Table.class_eval do
         include ::RPClustering::RGeo::ActiveRecord::ArelTableSpatialExpressions
