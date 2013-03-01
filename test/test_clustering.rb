@@ -103,6 +103,32 @@ module RPClustering
 
           end
 
+          def test_cluster_centroid_location_is_where_we_expect_it
+              arel_klass = populate_ar_class(:latlon_point)
+
+              points_generated = 0
+              (-5..5).each do |lng|
+                (-5..5).each do |lat|
+                  obj = arel_klass.new
+                  obj.latlon = @geographic_factory.point(lng, lat)
+                  obj.save!
+                  points_generated+=1
+                end
+              end
+
+              res = arel_klass.cluster_by_st_snap_to_grid(:latlon, grid_size: 100, cluster_geometry_count: true, cluster_centroid: true)
+              clusters = res.all
+              total_clusters = clusters.count()
+
+              # We should have one cluster.
+              assert_equal(1, total_clusters, "we should have one cluster with such a large grid_size")
+
+              centroid_point = @geographic_factory.parse_wkt(clusters.first["cluster_centroid"])
+
+              assert_equal(0, centroid_point.x, "we expect the centroid to be at 0,0")
+              assert_equal(0, centroid_point.y, "we expect the centroid to be at 0,0")
+          end
+
         end
       end
     end

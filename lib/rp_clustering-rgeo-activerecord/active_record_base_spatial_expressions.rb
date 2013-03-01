@@ -134,7 +134,7 @@ module RPClustering
 
             select(
               arel_table.st_astext(
-                arel_attr.st_collect
+                arel_table.st_centroid(arel_attr.st_collect)
               ).as(as)
             )
           end
