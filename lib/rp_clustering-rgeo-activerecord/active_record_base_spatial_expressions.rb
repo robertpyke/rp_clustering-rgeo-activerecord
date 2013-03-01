@@ -14,8 +14,7 @@ module RPClustering
 
         module ClassMethods
 
-          # Cluster using the PostGIS function ST_SnapToGrid
-          # -------------------------------------------------
+          # === Cluster using the PostGIS function ST_SnapToGrid
           #
           # attr_to_cluster is the name of attribute to be clustered (a symbol).
           # The attribute should be geometry attribute.
@@ -23,7 +22,7 @@ module RPClustering
           # Use the options Hash to define what cluster properties you would
           # like returned.
           #
-          # Options:
+          # == Options:
           #
           # [:grid_size] if set, will be used to create the cluster. The clustering
           #              works rougly like this; all geometries within 'grid_size'
@@ -36,26 +35,32 @@ module RPClustering
           #              This is actually just a Group By of your +attr_to_cluster+.
           #
           # [:cluster_geometry_count] if set to true, the query will select, for
-          #     each cluster, the number of geometries in the cluster.
+          #                           each cluster, the number of geometries in the cluster.
           #
           # [:cluster_geometry_count_as] the name to select the
-          #     cluster_geometry_count as, defaults to "cluster_geometry_count".
+          #                              cluster_geometry_count as, defaults 
+          #                              to "cluster_geometry_count".
           #
           # [:cluster_centroid] if set to true, the query will select, for
-          #     each cluster, the cluster centroid. The cluster_centroid returned
-          #     will be a WKT string.
+          #                     each cluster, the cluster centroid. The 
+          #                     cluster_centroid returned will be a WKT string.
           #
-          # [:cluster_centroid_as] the name to select the 
-          #     cluster_centroid as, defaults to "cluster_centroid".
+          # [:cluster_centroid_as] the name to select the cluster_centroid
+          #                        as, defaults to "cluster_centroid".
           #
           # [:cluster_minimum_bounding_circle] if set to true, the query will select,
-          #     for each cluster, the minimum bouding circle. The cluster_minimum_bounding_circle
-          #     will be a WKT string.
+          #                                    for each cluster, the minimum
+          #                                    bouding circle. The
+          #                                    cluster_minimum_bounding_circle
+          #                                    will be a WKT string.
           #
           # [:cluster_minimum_bounding_circle_as] the name to select the
-          #     cluster_minimum_bounding_circle as, defaults to "cluster_minimum_bounding_circle"
+          #                                       cluster_minimum_bounding_circle as,
+          #                                       defaults to "cluster_minimum_bounding_circle"
           #
-          # Note: Using the options hash, you must 'select' at least one attribute,
+          # == Note
+          #
+          # Using the options hash, you must 'select' at least one attribute,
           # else this method will raise an ArgumentError.
           #
 
