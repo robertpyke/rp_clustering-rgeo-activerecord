@@ -53,7 +53,7 @@ The function is added to ActiveRecord::Base (Models). The function is:
 # Options:
 #
 # [:grid_size] if set, will be used to create the cluster. The clustering
-#     works rougly like this; all geometries within 'grid_size'
+#     works rougly like this; all geometries within 'grid_size' of each other
 #     will be pulled together to form a single cluster. For a detailed
 #     explanation, please see the PostGIS docs for ST_SnapToGrid.
 #
