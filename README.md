@@ -34,7 +34,7 @@ Or install it yourself as:
 
 ## Usage
 
-### Added in Version 0.0.3
+### Added in Version 0.0.3 (Fixed in 0.0.4)
 
 This version allows for the "on the fly" use of a ST_SnapToGrid clustering function.
 The function is added to ActiveRecord::Base (Models). The function is:
