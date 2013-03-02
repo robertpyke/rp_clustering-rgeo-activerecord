@@ -17,7 +17,7 @@ module RPClustering
           # === Cluster using the PostGIS function ST_SnapToGrid
           #
           # attr_to_cluster is the name of attribute to be clustered (a symbol).
-          # The attribute should be geometry attribute.
+          # The attribute should be a geometry attribute.
           #
           # Use the options Hash to define what cluster properties you would
           # like returned.
@@ -110,7 +110,7 @@ module RPClustering
             )
 
             grid_size_valid = (
-              options[:grid_size].nil? or 
+              options[:grid_size].nil? or
               ( options[:grid_size].is_a? Numeric and options[:grid_size] >= 0 )
             )
 
